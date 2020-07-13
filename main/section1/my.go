@@ -1,19 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/big"
+)
 
 func main() {
-	var red uint8 = 255
-	red++
-	fmt.Println("red after incrementing: ", red)
+	lightSpeed := big.NewInt(299792)
+	secondsPerDay := big.NewInt(86400)
 
-	var number int8 = 127
-	number++
-	fmt.Println("number after incrementing", number)
-
-	red--
-	fmt.Println("red after decrementing: ", red)
-	number--
-	fmt.Println("number after decrementing", number)
-
+	distance := new(big.Int)
+	distance.SetString("24000000000000000000", 10)
+	fmt.Println("Andromeda Galaxy is", distance, "km away.")
+	seconds := new(big.Int)
+	seconds.Div(distance, lightSpeed)
+	days := new(big.Int)
+	days.Div(seconds, secondsPerDay)
+	fmt.Println("That is", days, "days of travel at light speed.")
 }
