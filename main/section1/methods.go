@@ -6,8 +6,6 @@ type fahrenheit float64
 
 type celsius float64
 
-type kelvin float64
-
 //celsius convert from kelvin to celsius
 func (k kelvin) celsius() celsius {
 	return celsius(k - 273.15)
