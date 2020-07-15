@@ -1,20 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"./section1"
+)
 
 func main() {
-	dwarfs := [5]string{
-		"Ceras",
-		"Pluto",
-		"Humea",
-		"Makemake",
-		"Eris",
-	}
-
-	arrCopy := dwarfs
-
-	arrCopy[0] = "oops"
-
-	fmt.Println(dwarfs)
-	fmt.Println(arrCopy)
+	section1.Main()
 }

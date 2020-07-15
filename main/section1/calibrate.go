@@ -24,7 +24,7 @@ func fakeSensor() kelvin {
 	return kelvin(rand.Intn(151) + 150)
 }
 
-func main() {
+func _() {
 	regulator := kelvin(5)
 	sensor := calibrate(realSensor, regulator)
 	fmt.Println(sensor())

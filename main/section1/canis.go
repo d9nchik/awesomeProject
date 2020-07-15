@@ -5,7 +5,7 @@ import (
 	"math/big"
 )
 
-func main() {
+func _() {
 	lightSpeed := big.NewInt(299792)
 	secondsPerDay := big.NewInt(86400)
 	daysPerYear := big.NewInt(365)
