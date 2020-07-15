@@ -1,9 +1,10 @@
 package main
 
-import (
-	"./section1"
-)
+import "fmt"
 
 func main() {
-	section1.Main()
+	dwarfs := []string{}
+
+	dwarfs = append(dwarfs, "Orcus")
+	fmt.Println(dwarfs)
 }
