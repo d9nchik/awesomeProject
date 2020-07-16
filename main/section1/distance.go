@@ -2,22 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
-
-type world struct {
-	radius float64
-}
-
-type location struct {
-	name      string
-	lat, long float64
-}
-
-type coordinate struct {
-	d, m, s float64
-	h       rune
-}
 
 var landingSiteOnMars = []location{
 	newLocation(coordinate{d: 14, m: 34, s: 6.2, h: 'S'}, coordinate{175, 28, 21.5, 'E'},
@@ -40,18 +25,6 @@ func main() {
 				landingSiteOnMars[j].name, mars.distance(landingSiteOnMars[i], landingSiteOnMars[j]))
 		}
 	}
-}
-
-func rad(deg float64) float64 {
-	return deg * math.Pi / 180
-}
-
-func (w world) distance(p1, p2 location) float64 {
-	s1, c1 := math.Sincos(rad(p1.lat))
-	s2, c2 := math.Sincos(rad(p2.lat))
-
-	clong := math.Cos(rad(p1.long - p2.long))
-	return w.radius * math.Acos(s1*s2+c1*c2*-clong)
 }
 
 func (c coordinate) decimal() float64 {
