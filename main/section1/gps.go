@@ -23,11 +23,6 @@ type location struct {
 	lat, long float64
 }
 
-type coordinate struct {
-	d, m, s float64
-	h       rune
-}
-
 func main() {
 	mars := world{radius: 3389.5}
 	start := location{name: "Bradbury Landing", lat: -4.5895, long: 137.4417}
