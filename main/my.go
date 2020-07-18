@@ -2,44 +2,30 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"os"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	err := proverbs("proverbs.txt")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	rand.Seed(time.Now().Unix())
+	marker := make(chan bool)
+	for i := 0; i < 5; i++ {
+		go sleepyGopher(i, marker)
+	}
+
+	timeout := time.After(2 * time.Second)
+	for i := 0; i < 5; i++ {
+		select {
+		case <-marker:
+		case <-timeout:
+			fmt.Println("I`ve waited to much")
+			return
+		}
 	}
 }
 
-func proverbs(name string) error {
-	f, err := os.Create(name)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	sw := safeWriter{w: f}
-	sw.writeln("Don't communicate by sharing memory, share memory by communicating.")
-	sw.writeln("Concurrency is not parallelism.")
-	sw.writeln("Channels orchestrate; mutexes serialize.")
-	sw.writeln("The bigger the interface, the weaker the abstraction.")
-	sw.writeln("Make the zero value useful.")
-
-	return sw.err
-}
-
-type safeWriter struct {
-	w   io.Writer
-	err error
-}
-
-func (sw *safeWriter) writeln(s string) {
-	if sw.err != nil {
-		return
-	}
-
-	_, sw.err = fmt.Fprintln(sw.w, s)
+func sleepyGopher(number int, input chan<- bool) {
+	defer func() { input <- true }()
+	time.Sleep(time.Duration(rand.Intn(4000)) * time.Millisecond)
+	fmt.Println("... snore...", number)
 }
